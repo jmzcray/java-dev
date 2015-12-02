@@ -35,7 +35,7 @@ public class MyFolder<T, U> implements Folder<T, U>
 
         Queue<Integer> q = new LinkedList<Integer>();
 
-        for(int lop =0; lop < 1000000; lop++ ){ //add some values in the Queue
+        for(int lop =0; lop < 5; lop++ ){ //add some values in the Queue
             q.add(lop);
         }
         Integer result = folder.fold(0, q, new Function2<Integer, Integer, Integer>() {
