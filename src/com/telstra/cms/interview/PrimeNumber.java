@@ -1,4 +1,4 @@
-//package com.telstra.cms.interview;
+package com.telstra.cms.interview;
 
 public class PrimeNumber {
 			 
