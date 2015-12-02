@@ -20,6 +20,8 @@ public class MyFlattenTree<T> implements FlattenTree<T> {
                 }
 
             } ));
+            // Java 8:
+            // return Arrays.asList(tree.get().<T> ifLeft(p -> p));
 
         } else {
             return tree.get().ifRight( new Function<Triple<Tree<T>>, List<T>>() {
@@ -34,31 +36,8 @@ public class MyFlattenTree<T> implements FlattenTree<T> {
                     return nodes; //return all fetched nodes
                 }
             } );
-        } //end if
-    } //end function
-
-
-
-//    LAMBDA EXPRESSION FOR JAVA 8
-//    @Override
-//    public List<T> flattenInOrder(final Tree<T> tree) {
-//        if (tree == null)
-//            throw new IllegalArgumentException("Tree is null.");
-//
-//        if (tree.get().isLeft()) {
-//            // Java 8:
-//            return Arrays.asList(tree.get().<T> ifLeft(p -> p));
-//        }
-//        return tree.get().ifRight(p -> {
-//
-//            final List<T> nodes = new ArrayList<>();
-//            nodes.addAll(flattenInOrder(p.left()));
-//            nodes.addAll(flattenInOrder(p.middle()));
-//            nodes.addAll(flattenInOrder(p.right()));
-//
-//            return nodes; // return all fetched nodes
-//        });
-//    }
+        }
+    }
 
     public static void main(String[] args)
     {
