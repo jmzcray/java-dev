@@ -17,6 +17,16 @@ public class RoboCallTest {
         Predicate<Person> allDraftees = p -> p.getAge() >= 18 && p.getAge() <= 25 && p.getGender() == Gender.MALE;
         Predicate<Person> allPilots = p -> p.getAge() >= 23 && p.getAge() <= 65;
 
+        // Java 7 - does not work
+//        robo.mailContacts(pl,
+//                new Predicate<Person>(){
+//            @Override
+//            public boolean test(Person p){
+//                return p.getAge() >= 23 && p.getAge() <= 65;
+//
+//            }
+//        )
+
         System.out.println("\n==== Test 04 ====");
         System.out.println("\n=== Calling all Drivers ===");
         robo.phoneContacts(pl, allDrivers);
