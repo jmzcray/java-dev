@@ -1,4 +1,6 @@
-package com.example.lambda;
+package com.example.lambda.function;
+
+import com.example.lambda.Person;
 
 import java.util.List;
 import java.util.function.Function;
