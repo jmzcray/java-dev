@@ -2,6 +2,7 @@ package com.example.lambda;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 /**
  * Created by d329312 on 4/12/2015.
@@ -137,6 +138,30 @@ public class Person {
         );
 
         return people;
+    }
+
+    public void printWesternName(){
+
+        System.out.println("\nName: " + this.getGivenName() + " " + this.getSurName() + "\n" +
+                "Age: " + this.getAge() + "  " + "Gender: " + this.getGender() + "\n" +
+                "EMail: " + this.getEmail() + "\n" +
+                "Phone: " + this.getPhone() + "\n" +
+                "Address: " + this.getAddress());
+    }
+
+
+
+    public void printEasternName(){
+
+        System.out.println("\nName: " + this.getSurName() + " " + this.getGivenName() + "\n" +
+                "Age: " + this.getAge() + "  " + "Gender: " + this.getGender() + "\n" +
+                "EMail: " + this.getEmail() + "\n" +
+                "Phone: " + this.getPhone() + "\n" +
+                "Address: " + this.getAddress());
+    }
+
+    public String printCustom(Function<Person, String> f){
+        return f.apply(this);
     }
 }
 
