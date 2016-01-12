@@ -9,7 +9,7 @@ public class DuplicateWords
 {
     public static void main(String[] args){
 
-        String pattern = "\\b(\\w+)\\b[\\w\\W]*\\b\\1\\b";
+        String pattern = "(?i)\\b(\\w+)\\b(?:\\s+\\1\\b)+";
         Pattern r = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE+Pattern.MULTILINE);
 
         Scanner in = new Scanner(System.in);
@@ -19,7 +19,6 @@ public class DuplicateWords
             Matcher m = r.matcher(input);
             boolean findMatch = true;
             while(m.find( )){
-                //input = input.replaceAll(m.group(), m.group(1));
                 input = input.replaceAll(pattern, "$1");
                 findMatch = false;
             }
