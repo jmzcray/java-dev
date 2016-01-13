@@ -12,7 +12,7 @@
  * Sample input:
  * 4
  * <h1>Nayeem loves counseling</h1>
- * <h1><h1>Sanjay has no watch</h1></h1><par>So wait for a while<par>
+ * <h1><h1>Sanjay has no watch</h1></h1><par>So wait for a while</par>
  * <Amee>safat codes like a ninja</amee>
  * <SA premium>Imtiaz has a secret crush</SA premium>
  *
@@ -30,25 +30,28 @@ import java.math.*;
 import java.util.regex.*;
 
 public class TagContentExtractor{
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         Scanner in = new Scanner(System.in);
         int testCases = Integer.parseInt(in.nextLine());
-        while(testCases>0){
+        while (testCases > 0) {
             String line = in.nextLine();
 
-            Pattern ptag = Pattern.compile("<([a-zA-Z0-9][a-zA-Z0-9 ]*)>");
-            Pattern pcontent = Pattern.compile("<[a-zA-Z0-9][a-zA-Z0-9 ]*>\\b(\\w+\\W+)\\b</[a-zA-Z0-9][a-zA-Z0-9 ]*>");
+            String tagregex = "<([a-zA-Z0-9][a-zA-Z0-9 ]*)>(.*)</\\1>";
+            if (line.matches(tagregex)) {
+                Pattern ptag = Pattern.compile(tagregex);
+                Matcher mtag = ptag.matcher(line);
 
-            Matcher mtag = ptag.matcher(line);
-
-            boolean match = false;
-            while (mtag.find()) {
-                System.out.println(mtag.group(1));
-                match = true;
-            }
-
-            if (!match)
+                while (mtag.find()) {
+//                    if (mtag.group(2).matches(tagregex)) {
+//                        Matcher nestedtag = ptag.matcher(mtag.group(2));
+//                        while (nestedtag.find())
+//                            System.out.println(nestedtag.group(2));
+//
+//                    } else
+                        System.out.println(mtag.group(2));
+                }
+            } else
                 System.out.println("None");
 
             testCases--;
