@@ -15,7 +15,7 @@
  12
  34
  *
- * Sample output:
+ * Sample output (test by editing the smaller grid in the bigger one to the corners):
  * YES
  *
  * Sample input (10x10 larger | 3x4 smaller):
@@ -77,11 +77,11 @@ public class SampleFindInGrid {
                     }
                     for (int y=1; y<P.length; y++) { // going through rows
                         for (int l : list) { // going through index
-                            if (l>0 && (i+y)<R && (l+c-1)<C) { // making sure no exceptions thrown for index boundary
+                            if (l>=0 && (i+y)<G.length && (l+c-1)<C) { // making sure no exceptions thrown for index boundary
                                 if (!P[y].equals(G[i + y].substring(l, l + c))) // if P[y](small grid) does not match G[i+y](big grid) at index(l)
                                     list.set(list.indexOf(l), -1); // remove index
                                 else {
-                                    if (y == r-1) { // if all strings found in small grid
+                                    if (y == P.length-1) { // if all strings found in small grid
                                         found = true;
                                         break search;
                                     }
