@@ -36,7 +36,6 @@ public class SampleMatrixRotation {
             for (int c=0; c<cols; c++){
                 arr[r][c] = in.nextInt();
             }
-
         }
 
         rows--;
