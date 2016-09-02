@@ -16,20 +16,75 @@ public class SampleBinaryTree {
 
     static String gatherScores(int[] scores) {
 
-        int treeDepth = scores.length / 2;
+        treeNode rootNode = new treeNode(scores[0]);
 
-        int[][] tree = new int[treeDepth][(int) Math.sqrt(scores.length)+1];
-        for (int i=0; i<scores.length; i++) {
-            int treeLength = (int) Math.ceil(Math.sqrt(i+1));
-            for (int y=0; y<treeLength; y++) {
-                i = i+y;
-                tree[i][y] = scores[i];
-            }
+        for (int i=1; i<scores.length; i++) {
+            massageTree(rootNode, scores[i]);
         }
 
-        return "";
+        String output = rootNode.value + ":" + rootNode.count + "," + printTree(rootNode);
+        return output.substring(0,output.length()-1);
     }
 
+    public static class treeNode {
+        treeNode left;
+        treeNode right;
+        int count;
+        int value;
+
+        //constructor
+        public treeNode(int a) {
+            value = a;
+            count = 1;
+        }
+    }
+
+    private static treeNode massageTree(treeNode currentNode, int value) {
+        if (currentNode.value > value) {
+            if (currentNode.left == null) {
+                treeNode newNode = new treeNode(value);
+                currentNode.left = newNode;
+                return newNode;
+            } else {
+                return massageTree(currentNode.left, value);
+            }
+        } else if (currentNode.value < value) {
+            if (currentNode.right == null) {
+                treeNode newNode = new treeNode(value);
+                currentNode.right = newNode;
+                return newNode;
+            } else {
+                return massageTree(currentNode.right, value);
+            }
+        } else {
+            currentNode.count++;
+            return currentNode;
+        }
+    }
+
+    private static String printTree (treeNode node) {
+        if (node.left == null && node.right == null) {
+            return "";
+        } else {
+            String output = "";
+            if (node.left != null) {
+                output += node.left.value + ":" + node.left.count;
+            }
+            output += ",";
+            if (node.right != null) {
+                output += node.right.value + ":" + node.right.count;
+            }
+            output += ",";
+
+            if (node.left != null) {
+                output += printTree(node.left);
+            }
+            if (node.right !=null) {
+                output += printTree(node.right);
+            }
+            return output;
+        }
+    }
 
     public static void main(String[] args) throws IOException{
         Scanner in = new Scanner(System.in);
