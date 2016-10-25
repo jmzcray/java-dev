@@ -16,7 +16,7 @@ public class SampleSumOf2NumbersInArray {
 
     static int numberOfPairs(int[] a, long k) {
 
-
+        return 0;
     }
 
     public static void main(String[] args) throws IOException{

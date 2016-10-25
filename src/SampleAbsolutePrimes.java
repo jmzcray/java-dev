@@ -16,7 +16,7 @@ public class SampleAbsolutePrimes {
 
     static int findLargestAbsolutePrimeInRange(int maximum) {
 
-
+        return 0;
     }
 
     public static void main(String[] args) throws IOException{
