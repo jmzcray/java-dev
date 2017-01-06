@@ -11,18 +11,26 @@ import java.util.Arrays;
 public class SampleArrayContains {
 
     public static String[] inArray(String[] array1, String[] array2) {
-        Set<String> resultSet = new TreeSet<String>();
+//        Set<String> resultSet = new TreeSet<String>();
+//
+//        for (int i=0; i<array1.length; i++) {
+//            for (int y=0; y<array2.length; y++) {
+//                if (array2[y].contains(array1[i])) {
+//                    resultSet.add(array1[i]);
+//                    break;
+//                }
+//            }
+//        }
+//
+//        return resultSet.toArray(new String[resultSet.size()]);
 
-        for (int i=0; i<array1.length; i++) {
-            for (int y=0; y<array2.length; y++) {
-                if (array2[y].contains(array1[i])) {
-                    resultSet.add(array1[i]);
-                    break;
-                }
-            }
-        }
 
-        return resultSet.toArray(new String[resultSet.size()]);
+        return Arrays.stream(array1)
+                .filter(str ->
+                        Arrays.stream(array2).anyMatch(s -> s.contains(str)))
+                .distinct()
+                .sorted()
+                .toArray(String[]::new);
     }
 
     public static void main(String[] args) throws IOException {
