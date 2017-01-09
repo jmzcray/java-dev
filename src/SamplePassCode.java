@@ -4,6 +4,7 @@
 
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -34,31 +35,50 @@ import java.util.Scanner;
  */
 
 public class SamplePassCode {
+
+    private static int count = 0;
+
     public static String playPass(String s, int n) {
 
-        StringBuilder sb = new StringBuilder();
-        int count=1;
+//        StringBuilder sb = new StringBuilder();
+//        int count=1;
+//
+//        for (char ch : s.toCharArray()) {
+//            if (Character.isDigit(ch)) {
+//                sb.append( String.valueOf(9 - Character.getNumericValue(ch)) );
+//            } else if (Character.isLetter(ch)) {
+//                if (Character.isLowerCase(ch))
+//                    ch = (char) ( ((int)ch + n - (int)'a') % 26 + (int)'a' );
+//                else
+//                    ch = (char) ( ((int)ch + n - (int)'A') % 26 + (int)'A' );
+//
+//                if (count % 2 == 0)
+//                    sb.append( String.valueOf(ch).toLowerCase() );
+//                else
+//                    sb.append( String.valueOf(ch).toUpperCase() );
+//            } else {
+//                sb.append( String.valueOf(ch) );
+//            }
+//            count++;
+//        }
+//
+//        return sb.reverse().toString();
 
-        for (char ch : s.toCharArray()) {
-            if (Character.isDigit(ch)) {
-                sb.append( String.valueOf(9 - Character.getNumericValue(ch)) );
-            } else if (Character.isLetter(ch)) {
-                if (Character.isLowerCase(ch))
-                    ch = (char) ( ((int)ch + n - (int)'a') % 26 + (int)'a' );
-                else
-                    ch = (char) ( ((int)ch + n - (int)'A') % 26 + (int)'A' );
+        count = 0;
 
-                if (count % 2 == 0)
-                    sb.append( String.valueOf(ch).toLowerCase() );
-                else
-                    sb.append( String.valueOf(ch).toUpperCase() );
-            } else {
-                sb.append( String.valueOf(ch) );
-            }
-            count++;
-        }
-
-        return sb.reverse().toString();
+        return new StringBuilder()
+                .append(
+                        s.toLowerCase()
+                                .chars()
+                                .map(i -> Character.isDigit(i) ? '9' - Character.getNumericValue(i) : i)
+                                .mapToObj(c -> (char) c)
+                                .map(i -> Character.isLetter(i) ?
+                                        (char) ( ((int)i + n - (int)'a') % 26 + (int)'a')  : i)
+                                .map(i -> (count++ % 2 == 0 ? Character.toUpperCase(i) : Character.toLowerCase(i)))
+                                .map(i -> i.toString())
+                                .collect(Collectors.joining("")))
+                .reverse()
+                .toString();
 
     }
 
