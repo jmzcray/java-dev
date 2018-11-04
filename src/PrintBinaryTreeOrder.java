@@ -1,6 +1,21 @@
 public class PrintBinaryTreeOrder {
 
     // Java program for different tree traversals
+    /* Sample Tree structure
+              1
+             / \
+            2   3
+           / \
+          4   5
+     */
+    /*
+     Breadth first (Level order): 1 2 3 4 5
+     Depth first:
+      - Preorder: 1 2 4 5 3
+      - Inorder: 4 2 5 1 3
+      - Postorder: 4 5 2 3 1
+    */
+
 
     /* Class containing left and right child of current
     node and key value*/
@@ -69,6 +84,16 @@ public class PrintBinaryTreeOrder {
             printPreorder(node.right);
         }
 
+        void printLevelorder(Node node) {
+            if (node.left == null || node.right == null)
+                return;
+
+            System.out.print(node.left.key + " " + node.right.key + " ");
+            printLevelorder(node.left);
+            printLevelorder(node.right);
+
+        }
+
         // Wrappers over above recursive functions
         void printPostorder() {
             printPostorder(root);
@@ -78,6 +103,10 @@ public class PrintBinaryTreeOrder {
         }
         void printPreorder() {
             printPreorder(root);
+        }
+        void printLevelorder() {
+            System.out.print(root.key + " ");
+            printLevelorder(root);
         }
 
         // Driver method
@@ -89,13 +118,6 @@ public class PrintBinaryTreeOrder {
             tree.root.right = new Node(3);
             tree.root.left.left = new Node(4);
             tree.root.left.right = new Node(5);
-            /* Tree structure
-                      1
-                     / \
-                    2   3
-                   / \
-                  4   5
-             */
 
             System.out.println("Preorder traversal of binary tree is ");
             tree.printPreorder();
@@ -105,6 +127,9 @@ public class PrintBinaryTreeOrder {
 
             System.out.println("\nPostorder traversal of binary tree is ");
             tree.printPostorder();
+
+            System.out.println("\nLevelorder traversal of binary tree is ");
+            tree.printLevelorder();
         }
     }
 
